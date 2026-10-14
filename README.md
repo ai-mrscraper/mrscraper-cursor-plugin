@@ -1,10 +1,9 @@
 # MrScraper for Cursor
 
 MrScraper connects [Cursor](https://cursor.com) to a hosted MCP server for
-fetching public web pages, managed structured extraction, Google discovery,
-saved scraper reruns, stored results, and account usage. The plugin also
-includes four focused skills that help the agent choose the right workflow and
-preserve raw page content.
+retrieving public web pages as HTML, Markdown, or screenshots, Google
+discovery, and account usage. The plugin also includes three focused skills
+that help the agent choose the right workflow and preserve raw page content.
 
 [Grok Bot](https://docs.x.ai/grok-bot/overview) installs plugins from the
 Cursor Marketplace, so the same plugin works there too.
@@ -14,10 +13,8 @@ Cursor Marketplace, so the same plugin works there too.
 - The hosted Streamable HTTP endpoint at `https://mcp.mrscraper.com/mcp`.
 - OAuth 2.1 browser sign-in through Cursor's MCP client; no API key to paste
   and no credential stored in this repository.
-- A fetch-first workflow that keeps raw page responses available for analysis,
-  verification, and follow-up transformations.
-- Managed extraction, site mapping, Google SERP discovery, saved reruns, and
-  stored-result tools when those capabilities are useful.
+- A retrieve-first workflow that keeps raw page responses available for
+  analysis, verification, and follow-up transformations.
 
 ## Requirements
 
@@ -61,9 +58,8 @@ and return to Cursor. In Grok Bot, choose **Authorize** when asked and finish
 the same sign-in in your browser.
 
 Cursor registers its own OAuth client with MrScraper, so there is no API key to
-copy. MrScraper grants `scrape:read` (`fetch`, `serp`, `results`, `result`),
-`scrape:write` (`scrape`, `rerun`), and `account:read` (`status`). Never paste
-OAuth tokens or API keys into chat.
+copy. MrScraper grants `scrape:read` (`scraperAPI`, `webSearch`) and
+`account:read` (`status`). Never paste OAuth tokens or API keys into chat.
 
 ## Try it
 
@@ -75,47 +71,36 @@ The connection exposes these MCP tools:
 
 | Tool | Purpose |
 | --- | --- |
-| `fetch` | Retrieve and preserve a known page's raw response. |
-| `scrape` | Run managed structured extraction or bounded site mapping. |
-| `serp` | Discover public pages through Google. |
-| `rerun` | Reuse a saved AI or manual scraper configuration. |
-| `results` | Browse and filter stored result records. |
-| `result` | Retrieve one stored result or poll an asynchronous run. |
-| `status` | Inspect subscription usage and request outcomes. |
+| `scraperAPI` | Retrieve a known page as HTML, Markdown, a screenshot, or a combination. |
+| `webSearch` | Discover public pages through Google. |
+| `status` | Inspect subscription status, token usage, and remaining tokens. |
 
 The skills appear in Cursor's **Agent Decides** list, and you can invoke one
 directly in chat:
 
 | Skill | Use it for |
 | --- | --- |
-| `/mrscraper` | Connection, authentication, routing, saved scrapers, stored results, and account usage. |
-| `/mrscraper-fetch` | Raw content from a known public URL; the default first step. |
-| `/mrscraper-scrape` | Managed structured extraction or bounded URL discovery within a site. |
+| `/mrscraper` | Connection, authentication, routing, and account usage. |
+| `/mrscraper-fetch` | Page content from a known public URL; the default first step. |
 | `/mrscraper-serp` | Google discovery when no target URL is known. |
 
-## Fetch-first routing
+## Retrieve-first routing
 
-When a public URL is already known, the skills direct the agent to fetch it
-first and treat the raw response as the source of truth. The agent can read,
-summarize, compare, or derive structured output locally without losing details
-to an early extraction prompt.
+When a public URL is already known, the skills direct the agent to retrieve it
+with `scraperAPI` first and treat the raw response as the source of truth. The
+agent can read, summarize, compare, or derive structured output locally without
+losing details.
 
-This preference can still be faster for large same-layout sets. For roughly
-100 known pages, the agent can safely fetch pages concurrently, retain every
-raw response, and apply one reusable local extractor instead of requesting 100
-separate backend-LLM extractions. Use `scrape` when managed extraction is
-explicitly requested or has a clear benefit after the page structure and
-desired schema are understood.
+For roughly 100 known pages that share a layout, the agent can retrieve pages
+concurrently, retain every raw response, and apply one reusable local
+extractor.
 
 ## Data and permissions
 
-The plugin sends MCP tool inputs, including target URLs and extraction
-instructions, to MrScraper's hosted service. Page responses and tool results
-are then available to the agent for the requested task. Managed general and
-listing extraction sends page content and the extraction prompt to a backend
-language model and saves a reusable scraper configuration; reruns create new
-stored results. Use it only with public or otherwise authorized content, and
-follow the target site's requirements.
+The plugin sends MCP tool inputs, including target URLs and search queries, to
+MrScraper's hosted service. Page responses and tool results are then available
+to the agent for the requested task. Use it only with public or otherwise
+authorized content, and follow the target site's requirements.
 
 Network endpoints and credentials:
 

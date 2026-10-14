@@ -1,8 +1,8 @@
 {
   "name": "mrscraper",
   "displayName": "MrScraper",
-  "version": "0.2.0",
-  "description": "Web scraping for AI agents: fetch public pages through MrScraper's unblocker, run managed structured extraction and site mapping, search Google, rerun saved scrapers, and read stored results and account usage. Uses MrScraper's hosted MCP server with browser sign-in (OAuth), no API key to paste, plus skills for fetch-first workflows.",
+  "version": "0.3.0",
+  "description": "Web scraping for AI agents: retrieve public pages as HTML, Markdown, or screenshots through MrScraper's Scraper API, search Google, and check account usage. Uses MrScraper's hosted MCP server with browser sign-in (OAuth), no API key to paste, plus skills for retrieve-first workflows.",
   "author": {
     "name": "MrScraper",
     "email": "support@mrscraper.com"
@@ -14,8 +14,8 @@
     "mrscraper",
     "mcp",
     "web-scraping",
-    "data-extraction",
-    "crawling",
+    "screenshots",
+    "markdown",
     "google-search",
     "serp",
     "research"
