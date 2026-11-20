@@ -58,7 +58,7 @@ and return to Cursor. In Grok Bot, choose **Authorize** when asked and finish
 the same sign-in in your browser.
 
 Cursor registers its own OAuth client with MrScraper, so there is no API key to
-copy. MrScraper grants `scraper:read` (the six scraping and search tools) and
+copy. MrScraper grants `scrape:read` (the six scraping and search tools) and
 `account:read` (`status`). Never paste OAuth tokens or API keys into chat.
 
 ## Try it
