@@ -13,10 +13,9 @@ project follows [Semantic Versioning](https://semver.org/).
   extraction. `webSearch` now takes `query`, `country`, and `numResults`
   instead of `url`, `region`, `num_results`, and `timeout`, and all tool
   inputs are camelCase. The README lists the seven tools.
-- The hosted server now uses two OAuth scopes: `scraper:read` for the six
-  scraping and search tools and `account:read` for `status`. It no longer uses
-  `scrape:read` or `scrape:write`; connections authorized with them must sign
-  in again so Cursor requests `scraper:read`.
+- The hosted server now uses two OAuth scopes: `scrape:read` for the six
+  scraping and search tools and `account:read` for `status`. Connections that
+  already hold `scrape:read` keep working; `scrape:write` is no longer needed.
 - Skills are identical to the MrScraper Claude 0.4.0, Grok 0.4.0, Antigravity
   0.4.0, and OpenCode 0.5.0 plugins.
 
